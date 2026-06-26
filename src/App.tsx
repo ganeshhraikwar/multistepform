@@ -22,7 +22,6 @@ const INITIAL_STATE: FormState = {
 export default function App() {
   const [state, setState] = useState<FormState>(INITIAL_STATE);
   const [errors, setErrors] = useState<ValidationErrors>({});
-  const [direction, setDirection] = useState(1);
 
   const validateStep1 = () => {
     const newErrors: ValidationErrors = {};
@@ -53,17 +52,14 @@ export default function App() {
   const handleNext = () => {
     if (state.currentStep === 1 && !validateStep1()) return;
     
-    setDirection(1);
     setState(s => ({ ...s, currentStep: s.currentStep + 1 }));
   };
 
   const handleBack = () => {
-    setDirection(-1);
     setState(s => ({ ...s, currentStep: s.currentStep - 1 }));
   };
 
   const handleGoToPlan = () => {
-    setDirection(-1);
     setState(s => ({ ...s, currentStep: 2 }));
   };
 
@@ -81,7 +77,7 @@ export default function App() {
         <div className="flex-grow px-6 py-8 md:px-[100px] md:py-10 relative bg-white mt-[99px] md:mt-0 mb-24 md:mb-0 rounded-xl md:rounded-none mx-4 sm:mx-8 md:mx-0 shadow-xl md:shadow-none flex flex-col z-10 md:bg-transparent">
           
           <div className="flex-grow relative overflow-hidden md:overflow-visible">
-              <div key={state.currentStep} className="w-full h-full animate-[fadeIn_0.3s_ease-in-out]">
+              <div key={state.currentStep} className="w-full h-full animate-fade-in">
                 {state.currentStep === 1 && (
                   <PersonalInfo 
                     data={state.userData} 

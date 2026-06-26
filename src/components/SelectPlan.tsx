@@ -43,7 +43,7 @@ export function SelectPlan({ planId, billingCycle, onChangePlan, onChangeCycle }
                   ${isYearly ? plan.priceYearly : plan.priceMonthly}/{isYearly ? 'yr' : 'mo'}
                 </p>
                 {isYearly && (
-                  <p className="text-marine-blue text-[12px] mt-1.5 font-medium animate-[fadeIn_0.3s_ease-in-out]">
+                  <p className="text-marine-blue text-[12px] mt-1.5 font-medium animate-fade-in">
                     {plan.freeMonths}
                   </p>
                 )}
