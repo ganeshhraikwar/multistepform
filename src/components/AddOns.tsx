@@ -1,7 +1,6 @@
 import React from 'react';
 import { BillingCycle } from '../types';
 import { ADD_ONS } from '../data';
-import { motion } from 'motion/react';
 import { Check } from 'lucide-react';
 
 interface AddOnsProps {
@@ -33,16 +32,14 @@ export function AddOns({ selectedAddOns, billingCycle, onChange }: AddOnsProps) 
           const isSelected = selectedAddOns.includes(addon.id);
           
           return (
-            <motion.div
+            <div
               key={addon.id}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
               onClick={() => toggleAddOn(addon.id)}
               className={`border-[1.5px] rounded-xl p-4 sm:px-6 sm:py-5 flex items-center gap-4 sm:gap-6 cursor-pointer transition-all duration-200 ${
                 isSelected 
                   ? 'border-purplish-blue bg-alabaster bg-opacity-50 ring-[1px] ring-purplish-blue' 
                   : 'border-[#D6D9E6] hover:border-purplish-blue hover:bg-magnolia/30'
-              }`}
+              } hover:-translate-y-0.5 active:scale-[0.99]`}
             >
               <div 
                 className={`w-5 h-5 rounded-[4px] flex items-center justify-center border-[1px] transition-colors ${
@@ -60,7 +57,7 @@ export function AddOns({ selectedAddOns, billingCycle, onChange }: AddOnsProps) 
               <div className="text-purplish-blue text-[13px] sm:text-sm font-medium">
                 +${isYearly ? addon.priceYearly : addon.priceMonthly}/{isYearly ? 'yr' : 'mo'}
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

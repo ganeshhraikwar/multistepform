@@ -33,6 +33,7 @@ export function Summary({ state, onGoToPlan }: SummaryProps) {
               {plan.name} ({state.billingCycle})
             </h3>
             <button 
+              type="button"
               onClick={onGoToPlan}
               className="text-cool-gray underline text-[13px] md:text-sm hover:text-purplish-blue transition-colors focus:outline-none focus:ring-2 focus:ring-purplish-blue rounded"
             >

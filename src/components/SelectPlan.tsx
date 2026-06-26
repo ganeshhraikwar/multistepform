@@ -1,7 +1,6 @@
 import React from 'react';
 import { BillingCycle } from '../types';
 import { PLANS } from '../data';
-import { motion } from 'motion/react';
 
 interface SelectPlanProps {
   planId: string;
@@ -26,16 +25,14 @@ export function SelectPlan({ planId, billingCycle, onChangePlan, onChangeCycle }
           const Icon = plan.icon;
           
           return (
-            <motion.div
+            <div
               key={plan.id}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.98 }}
               onClick={() => onChangePlan(plan.id)}
               className={`border-[1.5px] rounded-xl p-4 cursor-pointer transition-all duration-200 flex md:flex-col items-start gap-4 md:gap-10 md:pt-5 ${
                 isSelected 
                   ? 'border-purplish-blue bg-alabaster bg-opacity-50 ring-[1px] ring-purplish-blue' 
                   : 'border-[#D6D9E6] hover:border-purplish-blue hover:bg-magnolia/30'
-              }`}
+              } hover:-translate-y-0.5 active:scale-[0.98]`}
             >
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${plan.bg} ${plan.color}`}>
                 <Icon size={22} strokeWidth={2.5} />
@@ -46,16 +43,12 @@ export function SelectPlan({ planId, billingCycle, onChangePlan, onChangeCycle }
                   ${isYearly ? plan.priceYearly : plan.priceMonthly}/{isYearly ? 'yr' : 'mo'}
                 </p>
                 {isYearly && (
-                  <motion.p 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="text-marine-blue text-[12px] mt-1.5 font-medium"
-                  >
+                  <p className="text-marine-blue text-[12px] mt-1.5 font-medium animate-[fadeIn_0.3s_ease-in-out]">
                     {plan.freeMonths}
-                  </motion.p>
+                  </p>
                 )}
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
@@ -66,14 +59,13 @@ export function SelectPlan({ planId, billingCycle, onChangePlan, onChangeCycle }
         </span>
         
         <button 
+          type="button"
           onClick={() => onChangeCycle(isYearly ? 'monthly' : 'yearly')}
           className="w-10 h-5 bg-marine-blue rounded-full relative px-1 flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purplish-blue transition-colors"
           aria-label="Toggle billing cycle"
         >
-          <motion.div 
-            className="w-3.5 h-3.5 bg-white rounded-full shadow-sm"
-            animate={{ x: isYearly ? 20 : 0 }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          <div 
+            className={`w-3.5 h-3.5 bg-white rounded-full shadow-sm transition-transform duration-300 ease-in-out ${isYearly ? 'translate-x-5' : 'translate-x-0'}`}
           />
         </button>
         

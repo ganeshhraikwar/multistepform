@@ -6,7 +6,6 @@ import { SelectPlan } from './components/SelectPlan';
 import { AddOns } from './components/AddOns';
 import { Summary } from './components/Summary';
 import { ThankYou } from './components/ThankYou';
-import { motion, AnimatePresence } from 'motion/react';
 
 const INITIAL_STATE: FormState = {
   currentStep: 1,
@@ -68,28 +67,8 @@ export default function App() {
     setState(s => ({ ...s, currentStep: 2 }));
   };
 
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 50 : -50,
-      opacity: 0,
-      position: 'absolute' as const,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      position: 'relative' as const,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 50 : -50,
-      opacity: 0,
-      position: 'absolute' as const,
-    })
-  };
-
   return (
-    <div className="min-h-screen bg-magnolia flex items-start md:items-center justify-center p-0 md:p-4 font-sans relative">
+    <main className="min-h-screen bg-magnolia flex items-start md:items-center justify-center p-0 md:p-4 font-sans relative">
       {/* Mobile background map/color if needed outside */}
       <div className="w-full max-w-[940px] bg-transparent md:bg-white md:rounded-3xl md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:p-4 flex flex-col md:flex-row min-h-screen md:h-auto md:min-h-[600px] overflow-hidden md:overflow-visible relative z-10">
         
@@ -102,20 +81,7 @@ export default function App() {
         <div className="flex-grow px-6 py-8 md:px-[100px] md:py-10 relative bg-white mt-[99px] md:mt-0 mb-24 md:mb-0 rounded-xl md:rounded-none mx-4 sm:mx-8 md:mx-0 shadow-xl md:shadow-none flex flex-col z-10 md:bg-transparent">
           
           <div className="flex-grow relative overflow-hidden md:overflow-visible">
-            <AnimatePresence custom={direction} initial={false} mode="wait">
-              <motion.div
-                key={state.currentStep}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 }
-                }}
-                className="w-full h-full"
-              >
+              <div key={state.currentStep} className="w-full h-full animate-[fadeIn_0.3s_ease-in-out]">
                 {state.currentStep === 1 && (
                   <PersonalInfo 
                     data={state.userData} 
@@ -145,8 +111,7 @@ export default function App() {
                   />
                 )}
                 {state.currentStep === 5 && <ThankYou />}
-              </motion.div>
-            </AnimatePresence>
+              </div>
           </div>
 
           {/* Bottom Navigation */}
@@ -154,6 +119,7 @@ export default function App() {
             <div className="md:mt-8 flex justify-between items-center p-4 md:p-0 pt-4 bg-white md:bg-transparent fixed md:relative bottom-0 left-0 w-full md:w-auto shadow-[0_-4px_10px_rgb(0,0,0,0.05)] md:shadow-none z-20">
               {state.currentStep > 1 ? (
                 <button 
+                  type="button"
                   onClick={handleBack}
                   className="text-cool-gray font-bold hover:text-marine-blue transition-colors focus:outline-none focus:ring-2 focus:ring-marine-blue rounded px-2 py-1"
                 >
@@ -164,6 +130,7 @@ export default function App() {
               )}
               
               <button 
+                type="button"
                 onClick={handleNext}
                 className={`px-6 py-3 rounded-lg font-medium text-white transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purplish-blue/50 ${
                   state.currentStep === 4 
@@ -178,6 +145,6 @@ export default function App() {
         </div>
 
       </div>
-    </div>
+    </main>
   );
 }

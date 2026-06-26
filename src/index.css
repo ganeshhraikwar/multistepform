@@ -15,6 +15,13 @@
   --color-alabaster: hsl(231, 100%, 99%);
 }
 
+@layer utilities {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
 body {
   background-color: var(--color-magnolia);
   color: var(--color-marine-blue);
