@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(({ command }) => {
   return {
-    base: command === 'build' ? '/multi-step-form-react/' : '/',
+    base: command === 'build' ? '/multistepform/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
